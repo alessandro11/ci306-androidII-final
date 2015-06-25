@@ -1,0 +1,19 @@
+    public void send_post(View v) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("10.254.221.251/users.php");
+                try {
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                    nameValuePairs.add(new BasicNameValuePair("CMD", "ALL"));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    httpClient.execute(httpPost);
+                } catch( ClientProtocolException e ) {
+                    e.printStackTrace();
+                } catch( IOException e ) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
